@@ -1,79 +1,47 @@
-# Svelte Notes App
+# Svelte + Vite
 
-A modern, responsive notes application built with Svelte that allows users to create, edit, and manage their notes efficiently.
+This template should help get you started developing with Svelte in Vite.
 
-## Features
+## Recommended IDE Setup
 
-- Create and manage notes with a clean, intuitive interface
-- Real-time updates and persistence
-- Responsive design that works on both desktop and mobile
-- Markdown support for rich text formatting
-- Local storage for offline functionality
+[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
 
-## Getting Started
+## Need an official Svelte framework?
 
-### Prerequisites
+Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
 
-- Node.js (v14.0.0 or higher)
-- npm or yarn package manager
+## Technical considerations
 
-### Installation
+**Why use this over SvelteKit?**
 
-1. Clone the repository:
-```bash
-git clone https://github.com/RaviTwari03/Svelte-Notes-App.git
-cd Svelte-Notes-App
+- It brings its own routing solution which might not be preferable for some users.
+- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+
+This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+
+Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+
+**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+
+Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+
+**Why include `.vscode/extensions.json`?**
+
+Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+
+**Why enable `checkJs` in the JS template?**
+
+It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
+
+**Why is HMR not preserving my local component state?**
+
+HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
+
+If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
+
+```js
+// store.js
+// An extremely simple external store
+import { writable } from 'svelte/store'
+export default writable(0)
 ```
-
-2. Install dependencies:
-```bash
-npm install
-# or
-yarn install
-```
-
-3. Start the development server:
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-4. Open your browser and navigate to `http://localhost:5000`
-
-## Trade-offs and Assumptions
-
-### Trade-offs
-- Used local storage for data persistence instead of a backend database for simplicity and quick setup
-- Limited rich text formatting options to maintain a clean and focused user interface
-- Prioritized simplicity over complex features to ensure a smooth user experience
-
-### Assumptions
-- Users prefer a minimalist interface for note-taking
-- Local storage is sufficient for most users' needs
-- Users will primarily access the app through modern web browsers
-
-## Future Improvements
-
-Given more time, I would add the following features and improvements:
-
-1. Backend Integration
-   - Implement user authentication
-   - Add cloud storage for notes
-   - Enable note sharing between users
-
-2. Enhanced Features
-   - Note categories and tags
-   - Search functionality
-   - Note export options (PDF, Markdown)
-   - Collaborative editing
-
-3. Technical Improvements
-   - Add comprehensive test coverage
-   - Implement PWA functionality
-   - Add offline sync capabilities
-   - Optimize performance for large numbers of notes
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details. 
